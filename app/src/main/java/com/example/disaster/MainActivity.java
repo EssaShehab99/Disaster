@@ -1,14 +1,37 @@
 package com.example.disaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class MainActivity extends AppCompatActivity {
+    BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new WhetherFragment()).commit();
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.whether:
+                    openFragment(new WhetherFragment());
+                    return true;
+                case R.id.disaster:
+                    openFragment(new DisasterFragment());
+                    return true;
+            }
+            return false;
+        });
+
     }
+    public void openFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment).commit();
+
+    }
+
 }
