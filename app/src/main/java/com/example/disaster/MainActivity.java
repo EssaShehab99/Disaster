@@ -15,11 +15,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNavigation = findViewById(R.id.bottomNavigation);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new WhetherFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new WeatherFragment()).commit();
         bottomNavigation.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.whether:
-                    openFragment(new WhetherFragment());
+                    openFragment(new WeatherFragment());
                     return true;
                 case R.id.disaster:
                     openFragment(new DisasterFragment());

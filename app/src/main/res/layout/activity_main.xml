@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/white">
+        android:background="@color/white"
+        style="@style/theme_color">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
