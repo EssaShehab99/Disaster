@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,10 +35,13 @@ import java.util.Map;
 
 
 public class WeatherFragment extends Fragment {
+    TextView cityTextView;
+    TextView dateTextView;
+    TextView tempTextView;
+    TextView rainTextView;
+    TextView humidityTextView;
 
-    private static final String OPEN_WEATHER_MAP_API = "https://api.weatherapi.com/v1/current.json?key=a9415893546545e2a38124125220707&q=Yemen&aqi=no";
-    RequestQueue requestQueue;
-    WeatherRVModel weatherRVModel;
+    RequestQueue requestQueue;;
    private static final String[] COUNTRIES=new String[]{
             "Yemen",
             "Saudi Arabia",
@@ -57,32 +62,39 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
+        cityTextView = view.findViewById(R.id.city_text_view);
+        dateTextView = view.findViewById(R.id.date_text_view);
+        tempTextView = view.findViewById(R.id.temp_text_view);
+        rainTextView = view.findViewById(R.id.rain_text_view);
+        humidityTextView = view.findViewById(R.id.humidity_text_view);
+
         requestQueue = Volley.newRequestQueue(view.getContext());
         AutoCompleteTextView autoCompleteTextView = view.findViewById(R.id.country_edit_text);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, COUNTRIES);
         autoCompleteTextView.setAdapter(adapter);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, OPEN_WEATHER_MAP_API, null,
+        autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
+            getWeather("https://api.weatherapi.com/v1/current.json?key=a9415893546545e2a38124125220707&q="+parent.getItemAtPosition(position).toString()+"&aqi=no");
+            Toast.makeText(view.getContext(),parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+        });
+        getWeather("https://api.weatherapi.com/v1/current.json?key=a9415893546545e2a38124125220707&q=Qatar&aqi=no");
+        return view;
+    }
+    void getWeather(String url) {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        weatherRVModel =  WeatherRVModel.fromMap(response);
-                        TextView cityTextView = view.findViewById(R.id.city_text_view);
-                        TextView dateTextView = view.findViewById(R.id.date_text_view);
-                        TextView tempTextView = view.findViewById(R.id.temp_text_view);
-                        TextView rainTextView = view.findViewById(R.id.rain_text_view);
-                        TextView humidityTextView = view.findViewById(R.id.humidity_text_view);
+                        WeatherRVModel weatherRVModel =  WeatherRVModel.fromMap(response);
                         cityTextView.setText(weatherRVModel.getCity());
                         dateTextView.setText(weatherRVModel.getTime());
-                        tempTextView.setText(weatherRVModel.getTemperature());
-                        rainTextView.setText(weatherRVModel.getUv()+"%"+" Wind: "+weatherRVModel.getWindSpeed()+" mph");
+                        tempTextView.setText(weatherRVModel.getTemperature()+" °C");
+                        rainTextView.setText("Rain:"+weatherRVModel.getUv()+"% Wind: "+weatherRVModel.getWindSpeed()+" mph");
                         humidityTextView.setText(weatherRVModel.getHumidity()+"% :Humidity");
                     } catch (Exception e) {
-                       Log.e("WeatherFragment-1", e.getMessage());
+                        Log.e("WeatherFragment-1", e.getMessage());
                     }
                 }, error -> {
             Log.e("WeatherFragment-2", error.getMessage());
         });
-
         requestQueue.add(request);
-        return view;
     }
 }

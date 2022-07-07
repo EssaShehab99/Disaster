@@ -24,6 +24,7 @@
              android:layout_height="wrap_content"
              android:drawableStart="@drawable/ic_baseline_search_24"
              android:background="@null"
+             android:singleLine="true"
              android:hint="Choose a country"
              android:completionThreshold="1"
              android:completionHint="Choose a country"
@@ -49,14 +50,12 @@
                 android:id="@+id/city_text_view"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Sana'a"
                android:textSize="50sp"
                style="@style/textStyle"/>
            <TextView
                 android:id="@+id/date_text_view"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="MONDAY 7:00 AM"
                android:textSize="20sp"
                android:layout_gravity="center"
                style="@style/textStyle"/>
@@ -84,14 +83,12 @@
             android:id="@+id/temp_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22 C"
             android:textSize="50sp"
             style="@style/textStyle"/>
         <TextView
             android:id="@+id/rain_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0%: Rain Wind: 3 mph"
             android:textSize="20sp"
             android:layout_gravity="center"
             style="@style/textStyle"/>
@@ -99,7 +96,6 @@
             android:id="@+id/humidity_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="45% :Humidity"
             android:textSize="20sp"
             android:layout_gravity="center"
             style="@style/textStyle"/>
