@@ -51,7 +51,8 @@ public class WeatherFragment extends Fragment {
             "Qatar",
             "Bahrain",
             "Jordan",
-            "Lebanon"
+            "Lebanon",
+
     };
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,9 +75,8 @@ public class WeatherFragment extends Fragment {
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
             getWeather("https://api.weatherapi.com/v1/current.json?key=a9415893546545e2a38124125220707&q="+parent.getItemAtPosition(position).toString()+"&aqi=no");
-            Toast.makeText(view.getContext(),parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
         });
-        getWeather("https://api.weatherapi.com/v1/current.json?key=a9415893546545e2a38124125220707&q=Qatar&aqi=no");
+        getWeather("https://api.weatherapi.com/v1/current.json?key=a9415893546545e2a38124125220707&q=Yemen&aqi=no");
         return view;
     }
     void getWeather(String url) {
