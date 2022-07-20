@@ -13,6 +13,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderApi;
@@ -32,26 +33,24 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback , GoogleMap.OnMarkerClickListener {
+public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     boolean locationPermissionGranted = false;
     GoogleMap map;
-    private MarkerOptions options = new MarkerOptions();
-    private ArrayList<LatLng> latlngs = new ArrayList<>();
-
+    TextView title, description, phone;
+    List<HelpCenterModel> helpCenterModels = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disaster_map);
-
+        title = findViewById(R.id.title_tv);
+        description = findViewById(R.id.description_tv);
+        phone = findViewById(R.id.phone_tv);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
-        latlngs.add(new LatLng(15.285781587408973, 44.23610982802529));
-        latlngs.add(new LatLng(15.28901053803817, 44.23299846554647));
-
     }
 
     @Override
@@ -81,12 +80,9 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
         }
         try {
             if (locationPermissionGranted) {
-//                map.setMyLocationEnabled(true);
                 map.getUiSettings().setMyLocationButtonEnabled(true);
             } else {
-//                map.setMyLocationEnabled(false);
                 map.getUiSettings().setMyLocationButtonEnabled(false);
-//                lastKnownLocation = null;
                 getLocationPermission();
             }
         } catch (SecurityException e) {
@@ -101,7 +97,7 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
                 @SuppressLint("MissingPermission")
                 Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-                    private static final float DEFAULT_ZOOM = 15f;
+                    private static final float DEFAULT_ZOOM = 11f;
 
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
@@ -116,6 +112,7 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
                                         .position(new LatLng(lastKnownLocation.getLatitude(),
                                                 lastKnownLocation.getLongitude()))
                                         .title("You are here"));
+                                initial();
                             }
                         } else {
                             LatLng defaultLocation = new LatLng(0, 0);
@@ -131,16 +128,16 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    public void onClick(View view) {
-        List<HelpCenterModel> helpCenterModels = new ArrayList<>();
+    public void initial() {
 
-        helpCenterModels.add(new HelpCenterModel("first help center", "777111222","first help center description", new LatLng(15.41741396036151, 44.23907207834295)));
-        helpCenterModels.add(new HelpCenterModel("second help center", "777111333","second help center description", new LatLng(15.418376847811542, 44.167156102268336)));
-        helpCenterModels.add(new HelpCenterModel("third help center", "777111444","third help center description", new LatLng(15.390856073209445, 44.19097679223114)));
-        helpCenterModels.add(new HelpCenterModel("fourth help center", "777111555","fourth help center description", new LatLng(15.408790172241229, 44.29015245778259)));
+        helpCenterModels.add(new HelpCenterModel("first help center", "777111222", "first help center description", new LatLng(15.41741396036151, 44.23907207834295)));
+        helpCenterModels.add(new HelpCenterModel("second help center", "777111333", "second help center description", new LatLng(15.418376847811542, 44.167156102268336)));
+        helpCenterModels.add(new HelpCenterModel("third help center", "777111444", "third help center description", new LatLng(15.390856073209445, 44.19097679223114)));
+        helpCenterModels.add(new HelpCenterModel("fourth help center", "777111555", "fourth help center description", new LatLng(15.408790172241229, 44.29015245778259)));
         addMarkersToMap(helpCenterModels);
     }
-    private void addMarkersToMap(List<HelpCenterModel> helpCenterModels){
+
+    private void addMarkersToMap(List<HelpCenterModel> helpCenterModels) {
         for (HelpCenterModel helpCenter : helpCenterModels) {
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(helpCenter.getLatLng());
@@ -157,7 +154,13 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        Toast.makeText(this, marker.getTitle(), Toast.LENGTH_SHORT).show();
+        helpCenterModels.forEach(helpCenterModel -> {
+            if (marker.getPosition().equals(helpCenterModel.getLatLng())) {
+                title.setText(helpCenterModel.getName());
+                description.setText(helpCenterModel.getDescription());
+                phone.setText(helpCenterModel.getPhone());
+            }
+        });
         return false;
     }
 }

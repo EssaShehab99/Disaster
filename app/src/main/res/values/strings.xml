@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">Disaster</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name" translatable="false">Disaster management system</string>
+    <string name="registeration" translatable="false">Register</string>
+    <string name="todo" translatable="false">TODO</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="sign_in">Login</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="you_already_have_an_account">You Already Have An Account?</string>
+
 </resources>
