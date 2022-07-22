@@ -38,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:clipToPadding="false"
+        app:itemIconTint="@drawable/drawable_selector"
+        app:itemTextColor="@drawable/drawable_selector"
         android:paddingBottom="10dp"
         app:labelVisibilityMode="labeled"
         app:elevation="0dp"

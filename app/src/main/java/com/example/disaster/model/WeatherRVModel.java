@@ -1,10 +1,7 @@
-package com.example.disaster;
+package com.example.disaster.model;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Map;
-import java.util.Objects;
 
 public class WeatherRVModel {
     private String time;

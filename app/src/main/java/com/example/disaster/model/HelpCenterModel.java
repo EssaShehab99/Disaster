@@ -1,4 +1,4 @@
-package com.example.disaster;
+package com.example.disaster.model;
 
 import com.google.android.gms.maps.model.LatLng;
 

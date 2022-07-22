@@ -12,11 +12,10 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderApi;
+import com.example.disaster.model.HelpCenterModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,7 +37,7 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     boolean locationPermissionGranted = false;
     GoogleMap map;
-    TextView title, description, phone;
+    TextView title, description;
     List<HelpCenterModel> helpCenterModels = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_disaster_map);
         title = findViewById(R.id.title_tv);
         description = findViewById(R.id.description_tv);
-        phone = findViewById(R.id.phone_tv);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
@@ -158,7 +156,6 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
             if (marker.getPosition().equals(helpCenterModel.getLatLng())) {
                 title.setText(helpCenterModel.getName());
                 description.setText(helpCenterModel.getDescription());
-                phone.setText(helpCenterModel.getPhone());
             }
         });
         return false;

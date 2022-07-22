@@ -5,6 +5,7 @@
     <color name="white">#F8F8F8</color>
     <color name="background">#E5ECF4</color>
     <color name="dark">#263145</color>
+    <color name="grey">#4B4C4C</color>
     <color name="black">#0F0F0E</color>
     <color name="teal_700">#FF018786</color>
 </resources>

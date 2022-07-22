@@ -30,7 +30,7 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".WeatherAndDisasterActivity"
+            android:name=".MainActivity"
             android:exported="false" />
 
         <meta-data
@@ -44,7 +44,7 @@
             android:name=".DisasterMap"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".WeatherAndDisasterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

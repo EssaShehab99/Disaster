@@ -3,6 +3,7 @@ package com.example.disaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,7 +28,6 @@ public class WeatherAndDisasterActivity extends AppCompatActivity {
             }
             return false;
         });
-
     }
     public void openFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment).commit();
