@@ -41,10 +41,10 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".DisasterMap"
+            android:name=".WeatherAndDisasterActivity"
             android:exported="false" />
         <activity
-            android:name=".WeatherAndDisasterActivity"
+            android:name=".DisasterMap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

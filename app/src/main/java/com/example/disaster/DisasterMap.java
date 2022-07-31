@@ -6,14 +6,17 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.disaster.model.HelpCenterModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,6 +31,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,16 +48,36 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
     GoogleMap map;
     TextView title, description;
     List<HelpCenterModel> helpCenterModels = new ArrayList<>();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseStorage storage;
+    StorageReference storageReference;
+    ImageView phoneIV,directionIV;
+    String phone;
+    LatLng destination, currentLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disaster_map);
         title = findViewById(R.id.title_tv);
         description = findViewById(R.id.description_tv);
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        phoneIV = findViewById(R.id.phone_iv);
+        directionIV = findViewById(R.id.direction_iv);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+        phoneIV.setOnClickListener(v -> {
+           if(phone!=null){
+               call(phone);
+           }
+        });
+        directionIV.setOnClickListener(v -> {
+            if(currentLocation!=null&&destination !=null){
+                openDirection(currentLocation,destination);
+            }
+        });
     }
 
     @Override
@@ -103,6 +132,7 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
                             // Set the map's camera position to the current location of the device.
                             Location lastKnownLocation = task.getResult();
                             if (lastKnownLocation != null) {
+                                currentLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
                                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         new LatLng(lastKnownLocation.getLatitude(),
                                                 lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -127,12 +157,33 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
     }
 
     public void initial() {
+//        helpCenterModels.add(new HelpCenterModel("first help center", "777111222", "first help center description", new LatLng(15.41741396036151, 44.23907207834295)));
+//        helpCenterModels.add(new HelpCenterModel("second help center", "777111333", "second help center description", new LatLng(15.418376847811542, 44.167156102268336)));
+//        helpCenterModels.add(new HelpCenterModel("third help center", "777111444", "third help center description", new LatLng(15.390856073209445, 44.19097679223114)));
+//        helpCenterModels.add(new HelpCenterModel("fourth help center", "777111555", "fourth help center description", new LatLng(15.408790172241229, 44.29015245778259)));
+        try {
+            db.collection("HelpCenter").get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        try {
+                            HelpCenterModel helpCenterModel = HelpCenterModel.fromMap(document.getData(), document.getId());
+                            helpCenterModels.add(helpCenterModel);
+                            addMarkersToMap(helpCenterModels);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+//                            helpCenterModels.add(helpCenterModel);
+                    }
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
+                }
+            });
+            } catch (Exception error) {
+                Log.e("TAG", "Error getting documents: ", error);
+            Toast.makeText(this, "Error getting documents: "+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
 
-        helpCenterModels.add(new HelpCenterModel("first help center", "777111222", "first help center description", new LatLng(15.41741396036151, 44.23907207834295)));
-        helpCenterModels.add(new HelpCenterModel("second help center", "777111333", "second help center description", new LatLng(15.418376847811542, 44.167156102268336)));
-        helpCenterModels.add(new HelpCenterModel("third help center", "777111444", "third help center description", new LatLng(15.390856073209445, 44.19097679223114)));
-        helpCenterModels.add(new HelpCenterModel("fourth help center", "777111555", "fourth help center description", new LatLng(15.408790172241229, 44.29015245778259)));
-        addMarkersToMap(helpCenterModels);
+//        addMarkersToMap(helpCenterModels);
     }
 
     private void addMarkersToMap(List<HelpCenterModel> helpCenterModels) {
@@ -156,8 +207,24 @@ public class DisasterMap extends AppCompatActivity implements OnMapReadyCallback
             if (marker.getPosition().equals(helpCenterModel.getLatLng())) {
                 title.setText(helpCenterModel.getName());
                 description.setText(helpCenterModel.getDescription());
+                phone = helpCenterModel.getPhone();
+                destination = helpCenterModel.getLatLng();
             }
         });
         return false;
+    }
+
+    public void call(String phoneNumInput) {
+        String url = "tel:" + phoneNumInput;
+        Uri uri = Uri.parse(url);
+        Intent it = new Intent(Intent.ACTION_DIAL, uri);
+        startActivity(it);
+    }
+    public void openDirection(LatLng CurrentLocation, LatLng destination) {
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("http://maps.google.com/maps?saddr=" +
+                        CurrentLocation.latitude + "," + CurrentLocation.longitude + "&daddr=" + destination.latitude + "," +
+                        destination.longitude));
+        startActivity(intent);
     }
 }

@@ -4,13 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Disaster/app/src/main/res/drawable/drawable_selector.xml" value="0.12" />
+        <entry key="..\:/Disaster/app/src/main/res/drawable/ic_baseline_directions_24.xml" value="0.182" />
         <entry key="..\:/Disaster/app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.1845" />
+        <entry key="..\:/Disaster/app/src/main/res/drawable/ic_menu.xml" value="0.1955" />
         <entry key="..\:/Disaster/app/src/main/res/drawable/ic_weather.xml" value="0.1845" />
         <entry key="..\:/Disaster/app/src/main/res/drawable/map_rounded_corner_overlay.xml" value="0.1845" />
-        <entry key="..\:/Disaster/app/src/main/res/layout/activity_disaster_map.xml" value="0.5627177700348432" />
-        <entry key="..\:/Disaster/app/src/main/res/layout/activity_weather_and_disaster.xml" value="0.25" />
+        <entry key="..\:/Disaster/app/src/main/res/layout/activity_disaster_map.xml" value="0.2" />
+        <entry key="..\:/Disaster/app/src/main/res/layout/activity_weather_and_disaster.xml" value="0.2" />
         <entry key="..\:/Disaster/app/src/main/res/layout/bnv_tab_item_foreground.xml" value="0.1" />
+        <entry key="..\:/Disaster/app/src/main/res/layout/fragment_disaster.xml" value="0.228125" />
         <entry key="..\:/Disaster/app/src/main/res/layout/fragment_weather.xml" value="0.25" />
+        <entry key="..\:/Disaster/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/EssaShehab99/AndroidStudioProjects/Disaster/app/src/main/res/drawable-mdpi/custom_button.xml" value="0.136" />
         <entry key="..\:/Users/EssaShehab99/AndroidStudioProjects/Disaster/app/src/main/res/drawable-mdpi/custom_input.xml" value="0.1635" />
         <entry key="..\:/Users/EssaShehab99/AndroidStudioProjects/Disaster/app/src/main/res/drawable-mdpi/ic_wave__4_.xml" value="0.1635" />
