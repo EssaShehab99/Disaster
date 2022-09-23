@@ -8,98 +8,124 @@
     android:orientation="vertical"
     tools:context=".DisasterMap">
 
-    <LinearLayout
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="2">
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".MapsActivity" />
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/map"
-            tools:context=".MapsActivity"
-            android:name="com.google.android.gms.maps.SupportMapFragment" />
-    </LinearLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="20dp"
-        android:layout_weight="3"
-        android:background="@drawable/rounded_corner_overlay"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/map">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title_tv"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:text="First Center"
-                android:textColor="@color/dark"
-                android:textSize="15sp" />
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_corner_overlay"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-            <TextView
-                android:id="@+id/description_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:text="First Center detals"
-                android:textColor="@color/dark"
-                android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/dark"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/description_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark"
+                    android:textSize="15sp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/phone_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_local_phone_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/direction_iv"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/direction_iv"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_directions_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/phone_iv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/layout" >
+
+                <TextView
+                    android:id="@+id/title_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:fontFamily="serif-monospace"
+                    android:textColor="#FFAA00"
+                    android:textSize="25sp" />
 
                 <ImageView
-                    android:id="@+id/phone_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:id="@+id/disaster_img"
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
                     android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:paddingVertical="5dp"
-                    android:src="@drawable/ic_baseline_local_phone_24" />
-                <ImageView
-                    android:id="@+id/direction_iv"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:paddingVertical="5dp"
-                    android:src="@drawable/ic_baseline_directions_24" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/title_img" />
+
+                <TextView
+                    android:id="@+id/disaster_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toBottomOf="@id/disaster_img" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="3"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="information about Hurricanes:"
-            android:textColor="@color/grey"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hurricanes  are dangerous and  can  cause  major damage   from   storm   surge,  wind  damage, rip currents  and  flooding.  They  can  happen along any U.S. coast or in any territory in the Atlantic or Pacific oceans."
-            android:textColor="@color/grey"
-            android:textSize="15sp" />
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

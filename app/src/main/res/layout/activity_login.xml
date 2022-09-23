@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".LoginActivity">
+    tools:context=".Activity_login">
 
     <View
         android:id="@+id/view2"
@@ -67,19 +67,19 @@
         android:background="@drawable/custom_input"
         android:backgroundTintMode="src_in"
         android:drawableStart="@drawable/custom_email"
-        android:drawablePadding="10dp"
+        android:drawablePadding="5dp"
         android:elevation="5dp"
         android:ems="10"
         android:hint="Email"
-
         android:inputType="textEmailAddress"
+
         android:minHeight="48dp"
+        android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/downview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.133" />
 
     <EditText
         android:id="@+id/Passwordid"
@@ -88,7 +88,8 @@
         android:background="@drawable/custom_input"
         android:backgroundTintMode="src_in"
         android:drawableStart="@drawable/custom_lock"
-        android:drawablePadding="10dp"
+        android:drawablePadding="5dp"
+        android:padding="15dp"
         android:elevation="5dp"
         android:ems="10"
 
@@ -117,8 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_button"
-        app:backgroundTint="@color/white"
-        android:textColor="@color/black"
+        android:backgroundTint="#DCB237"
         android:fontFamily="serif"
         android:onClick="onCrickregister"
         android:paddingStart="25dp"
@@ -127,37 +127,35 @@
         android:paddingBottom="15dp"
         android:text="@string/registeration"
         android:textAllCaps="false"
-        android:textSize="18sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintHorizontal_bias="0.949"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buLogin"
-        app:layout_constraintVertical_bias="0.112" />
+        app:layout_constraintVertical_bias="0.273" />
 
     <Button
         android:id="@+id/buLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_button"
-        app:backgroundTint="@color/white"
-        android:textColor="@color/black"
         android:fontFamily="serif"
-        android:paddingStart="30dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="30dp"
-        android:paddingBottom="20dp"
+        android:paddingStart="25dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="25dp"
+        android:paddingBottom="15dp"
         android:text="@string/login"
         android:textAllCaps="false"
-        android:textSize="18sp"
+        android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Passwordid"
-        app:layout_constraintVertical_bias="0.132" />
+        app:layout_constraintVertical_bias="0.163" />
 
     <TextView
         android:id="@+id/textView2"
@@ -175,64 +173,64 @@
         tools:ignore="MissingConstraints" />
 
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
 
 
-        android:text="---------  or sign in with  ---------"
-        android:textColor="#FF6D00"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.438"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buRegister"
-        app:layout_constraintVertical_bias="0.181"
-        tools:ignore="MissingConstraints" />
+<!--        android:text="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;  or sign in with  -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"-->
+<!--        android:textColor="#FF6D00"-->
+<!--        android:textSize="15sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.438"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/buRegister"-->
+<!--        app:layout_constraintVertical_bias="0.181"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
-    <ImageButton
-        android:id="@+id/Google"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
+<!--    <ImageButton-->
+<!--        android:id="@+id/Google"-->
+<!--        android:layout_width="37dp"-->
+<!--        android:layout_height="37dp"-->
 
-        android:background="@drawable/google"
-        android:fontFamily="serif"
-        android:paddingStart="25dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="25dp"
-        android:paddingBottom="15dp"
-        android:textAllCaps="false"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.584"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.129"
-        tools:ignore="MissingConstraints,OnClick,UsingOnClickInXml" />
+<!--        android:background="@drawable/google"-->
+<!--        android:fontFamily="serif"-->
+<!--        android:paddingStart="25dp"-->
+<!--        android:paddingTop="15dp"-->
+<!--        android:paddingEnd="25dp"-->
+<!--        android:paddingBottom="15dp"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textSize="13sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.584"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView4"-->
+<!--        app:layout_constraintVertical_bias="0.129"-->
+<!--        tools:ignore="MissingConstraints,OnClick,UsingOnClickInXml" />-->
 
-    <ImageButton
-        android:id="@+id/facebook"
-        android:layout_width="49dp"
-        android:layout_height="50dp"
-        android:background="@drawable/facebook2"
-        android:fontFamily="serif"
-        android:paddingStart="25dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="25dp"
-        android:paddingBottom="15dp"
-        android:textAllCaps="false"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/downview"
-        app:layout_constraintHorizontal_bias="0.167"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.061"
-        tools:ignore="MissingConstraints,OnClick,UsingOnClickInXml" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/facebook"-->
+<!--        android:layout_width="49dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:background="@drawable/facebook2"-->
+<!--        android:fontFamily="serif"-->
+<!--        android:paddingStart="25dp"-->
+<!--        android:paddingTop="15dp"-->
+<!--        android:paddingEnd="25dp"-->
+<!--        android:paddingBottom="15dp"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/downview"-->
+<!--        app:layout_constraintHorizontal_bias="0.167"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/textView4"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView4"-->
+<!--        app:layout_constraintVertical_bias="0.061"-->
+<!--        tools:ignore="MissingConstraints,OnClick,UsingOnClickInXml" />-->
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -258,8 +256,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintHorizontal_bias="0.881"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view2"
-        app:layout_constraintVertical_bias="0.302" />
+        app:layout_constraintVertical_bias="0.348" />
 </androidx.constraintlayout.widget.ConstraintLayout>
